@@ -1,0 +1,7 @@
+
+BSSID, First time seen, Last time seen, channel, Speed, Privacy, Cipher, Authentication, Power, # beacons, # IV, LAN IP, ID-length, ESSID, Key
+3A:20:85:96:A8:84, 2024-10-22 21:07:58, 2024-10-22 21:12:01, 11, 180, WPA2, CCMP, PSK, -40,      170,       65,   0.  0.  0.  0,   5, Neyuh, 
+
+Station MAC, First time seen, Last time seen, Power, # packets, BSSID, Probed ESSIDs
+4A:EB:AC:AF:F8:34, 2024-10-22 21:08:04, 2024-10-22 21:11:58, -20,       77, 3A:20:85:96:A8:84,Neyuh
+
